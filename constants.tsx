@@ -19,7 +19,7 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Коаксиальный дымоход (нержавейка)'
     ],
     justification: 'Для домов до 100 м² газовое отопление экономически эффективнее электрического при наличии магистрали.',
-    image: 'https://picsum.photos/seed/chic1/600/400'
+    image: 'https://i.postimg.cc/FY9p1h38/econom-gaz.jpg'
   },
   {
     id: 'std',
@@ -33,7 +33,7 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 3 кВт + 2x LiFePo4 100Ач'
     ],
     justification: 'Конденсационные котлы достигают КПД до 98%, напрямую снижая затраты на топливо.',
-    image: 'https://picsum.photos/seed/chic2/600/400'
+    image: 'https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg'
   },
   {
     id: 'prm',
@@ -47,7 +47,7 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 10 кВт + станция LiFePo4 15 кВт*ч'
     ],
     justification: 'Независимость от сетей критична в пик зимы при возможных авариях на ЛЭП.',
-    image: 'https://picsum.photos/seed/chic3/600/400'
+    image: 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg'
   },
   {
     id: 'htech',
@@ -61,7 +61,7 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Утилизация тепла двигателя'
     ],
     justification: 'КПД до 95%. Генерация "бесплатного" электричества окупает систему за 3-5 лет.',
-    image: 'https://picsum.photos/seed/chic4/600/400'
+    image: 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg'
   },
   {
     id: 'ind',
@@ -75,7 +75,7 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Резервное топливное хозяйство (ПП №798)'
     ],
     justification: 'Своя генерация дешевле подключения к ЛЭП для удаленных объектов.',
-    image: 'https://picsum.photos/seed/chic5/600/400'
+    image: 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg'
   }
 ];
 
@@ -92,7 +92,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Монтаж за 1-2 дня, без дымохода'
     ],
     justification: 'Самое быстрое и дешевое решение. ZOTA надежно работает при перепадах напряжения в поселках.',
-    image: 'https://picsum.photos/seed/nogas1/600/400'
+    image: 'https://i.postimg.cc/pyqWSy7W/econom.jpg'
   },
   {
     id: 'ng-opt',
@@ -106,7 +106,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Экономия в 3-4 раза выше электрокотла'
     ],
     justification: 'Лучший баланс цены и экономичности. Окупаемость 4-5 лет за счет низкого энергопотребления.',
-    image: 'https://picsum.photos/seed/nogas2/600/400'
+    image: 'https://i.postimg.cc/PPJXnTsr/standart-nogaz.jpg'
   },
   {
     id: 'ng-prm',
@@ -120,7 +120,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Стабильное тепло в любые морозы'
     ],
     justification: 'Максимальная эффективность круглый год. Земля на глубине всегда +5-7°C. Срок службы 30+ лет.',
-    image: 'https://picsum.photos/seed/nogas3/600/400'
+    image: 'https://i.postimg.cc/8jcpgN8x/premium-bezgaza.jpg'
   },
   {
     id: 'ng-ind',
@@ -134,7 +134,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Гибридный инвертор "Солнечный ветер"'
     ],
     justification: 'Снижение пиковых нагрузок. Солнечные панели летом полностью покрывают ГВС и кондиционирование.',
-    image: 'https://picsum.photos/seed/nogas4/600/400'
+    image: 'https://i.postimg.cc/8jcpgNQg/hitech-bezgaza.jpg'
   },
   {
     id: 'ng-pellet',
@@ -148,7 +148,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Факельная горелка, авторозжиг'
     ],
     justification: 'Идеально для производств с отходами деревообработки. Окупаемость 2-4 года при наличии отходов.',
-    image: 'https://picsum.photos/seed/nogas5/600/400'
+    image: 'https://i.postimg.cc/Cz5hpSTM/prom-nogaz.jpg'
   }
 ];
 
