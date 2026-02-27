@@ -43,8 +43,9 @@ import Law384 from './Law384';
 import Certificates from './Certificates';
 import DesignService from './DesignService';
 import EquipmentFAQ from './EquipmentFAQ';
+import ContactModal from './src/ContactModal';
 
-const Header = () => (
+const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
   <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
       <div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
@@ -62,7 +63,7 @@ const Header = () => (
           <Phone size={20} />
           <span>+7 (351) 230-99-96</span>
         </a>
-        <button className="hidden lg:block bg-[#b22222] text-white px-6 py-2 rounded-sm font-semibold hover:bg-red-800 transition-all duration-300">
+        <button onClick={onOpenContact} className="hidden lg:block bg-[#b22222] text-white px-6 py-2 rounded-sm font-semibold hover:bg-red-800 transition-all duration-300">
           Заказать расчет
         </button>
       </div>
@@ -485,7 +486,7 @@ const ExpertiseCatalog = () => (
   </section>
 );
 
-const Footer = ({ onOpenDesign }: { onOpenDesign: () => void }) => (
+const Footer = ({ onOpenDesign, onOpenContact }: { onOpenDesign: () => void, onOpenContact: () => void }) => (
   <footer className="bg-[#0b2a4a] text-white py-16">
     <div className="container mx-auto px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -536,7 +537,7 @@ const Footer = ({ onOpenDesign }: { onOpenDesign: () => void }) => (
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-[#b22222] shrink-0" />
-              <span>info@chik74.ru</span>
+              <span>chik174@yandex.ru</span>
             </li>
           </ul>
         </div>
@@ -546,7 +547,7 @@ const Footer = ({ onOpenDesign }: { onOpenDesign: () => void }) => (
           <p className="text-xs text-gray-500 mb-4 italic">
             Мы работаем в строгом соответствии с Правилами пользования газом (ПП РФ №798 от 30.05.2025). 
           </p>
-          <button className="w-full bg-[#b22222] py-3 rounded text-sm font-bold hover:bg-red-800 transition-colors">
+          <button onClick={onOpenContact} className="w-full bg-[#b22222] py-3 rounded text-sm font-bold hover:bg-red-800 transition-colors">
             Получить консультацию
           </button>
         </div>
@@ -560,6 +561,13 @@ const Footer = ({ onOpenDesign }: { onOpenDesign: () => void }) => (
 
 export default function App() {
   const [view, setView] = useState<'home' | 'gas-requirements' | 'price-list' | 'solution-eco' | 'solution-optimal' | 'solution-premium' | 'solution-cogen' | 'solution-industrial' | 'solution-ng-eco' | 'solution-ng-opt' | 'solution-ng-prm' | 'solution-ng-hitech' | 'solution-ng-comm' | 'law-410' | 'law-798' | 'law-624' | 'law-384' | 'certificates' | 'design' | 'equipment-faq'>('home');
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [contactModalTitle, setContactModalTitle] = useState('Заказать расчет');
+
+  const openContactModal = (title: string) => {
+    setContactModalTitle(title);
+    setIsContactModalOpen(true);
+  };
 
   if (view === 'gas-requirements') {
     return <GasRequirements onBack={() => setView('home')} onOpenLaw={(id) => setView(`law-${id}` as any)} />;
@@ -675,7 +683,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header onOpenContact={() => openContactModal('Заказать расчет')} />
       <main className="flex-grow">
         <Hero 
           onOpenGasReq={() => setView('gas-requirements')} 
@@ -716,7 +724,15 @@ export default function App() {
           </div>
         </section>
       </main>
-      <Footer onOpenDesign={() => { setView('design'); window.scrollTo(0, 0); }} />
+      <Footer 
+        onOpenDesign={() => { setView('design'); window.scrollTo(0, 0); }} 
+        onOpenContact={() => openContactModal('Получить консультацию')}
+      />
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+        title={contactModalTitle}
+      />
     </div>
   );
 }

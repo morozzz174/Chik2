@@ -92,7 +92,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Монтаж за 1-2 дня, без дымохода'
     ],
     justification: 'Самое быстрое и дешевое решение. ZOTA надежно работает при перепадах напряжения в поселках.',
-    image: 'https://i.postimg.cc/pyqWSy7W/econom.jpg'
+    image: 'https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg'
   },
   {
     id: 'ng-opt',
@@ -106,7 +106,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Экономия в 3-4 раза выше электрокотла'
     ],
     justification: 'Лучший баланс цены и экономичности. Окупаемость 4-5 лет за счет низкого энергопотребления.',
-    image: 'https://i.postimg.cc/PPJXnTsr/standart-nogaz.jpg'
+    image: 'https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg'
   },
   {
     id: 'ng-prm',
@@ -120,7 +120,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Стабильное тепло в любые морозы'
     ],
     justification: 'Максимальная эффективность круглый год. Земля на глубине всегда +5-7°C. Срок службы 30+ лет.',
-    image: 'https://i.postimg.cc/8jcpgN8x/premium-bezgaza.jpg'
+    image: 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg'
   },
   {
     id: 'ng-ind',
@@ -134,7 +134,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Гибридный инвертор "Солнечный ветер"'
     ],
     justification: 'Снижение пиковых нагрузок. Солнечные панели летом полностью покрывают ГВС и кондиционирование.',
-    image: 'https://i.postimg.cc/8jcpgNQg/hitech-bezgaza.jpg'
+    image: 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg'
   },
   {
     id: 'ng-pellet',
@@ -148,7 +148,7 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Факельная горелка, авторозжиг'
     ],
     justification: 'Идеально для производств с отходами деревообработки. Окупаемость 2-4 года при наличии отходов.',
-    image: 'https://i.postimg.cc/Cz5hpSTM/prom-nogaz.jpg'
+    image: 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg'
   }
 ];
 
