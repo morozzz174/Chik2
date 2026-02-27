@@ -6,17 +6,20 @@ import {
   Maximize2, 
   FileCheck, 
   Download,
-  Search,
-  ZoomIn,
   ArrowDown
 } from 'lucide-react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface Certificate {
   id: string;
   title: string;
   number: string;
   equipment: string;
-  pages: string[];
+  url: string;
 }
 
 const CERTIFICATES: Certificate[] = [
@@ -25,63 +28,63 @@ const CERTIFICATES: Certificate[] = [
     title: 'Сертификат Jason H.E.S.&T',
     number: '№ ЕАЭС RU C-CN.АЖ49.В.04701/24',
     equipment: 'Котлы водогрейные отопительные E8',
-    pages: ['https://picsum.photos/seed/cert1/800/1200', 'https://picsum.photos/seed/cert1-2/800/1200', 'https://picsum.photos/seed/cert1-3/800/1200']
+    url: '/cert1.pdf'
   },
   {
     id: '2',
     title: 'Сертификат Kentatsu (Пром)',
     number: '№ ЕАЭС RU C-TR.HB26.B.04232/24',
     equipment: 'Котлы газовые отопительные > 100 кВт',
-    pages: ['https://picsum.photos/seed/cert2/800/1200']
+    url: '/cert2.pdf'
   },
   {
     id: '3',
     title: 'Сертификат Kentatsu (Быт)',
     number: '№ ЕАЭС RU C-CN.АБ53.В.07752/23',
     equipment: 'Котлы отопительные газовые до 100 кВт',
-    pages: ['https://picsum.photos/seed/cert3/800/1200', 'https://picsum.photos/seed/cert3-2/800/1200']
+    url: '/cert3.pdf'
   },
   {
     id: '4',
     title: 'Сертификат Kentatsu (Электро)',
     number: '№ ЕАЭС RU C-CN.НВ93.В.00826/21',
     equipment: 'Электрические котлы Kentatsu',
-    pages: ['https://picsum.photos/seed/cert4/800/1200', 'https://picsum.photos/seed/cert4-2/800/1200']
+    url: '/cert4.pdf'
   },
   {
     id: '5',
     title: 'Сертификат Kentatsu (Газ)',
     number: '№ ЕАЭС RU C-TR.АБ53.В.08647/23',
     equipment: 'Котлы газовые двухконтурные Nobby Smart',
-    pages: ['https://picsum.photos/seed/cert5/800/1200']
+    url: '/cert5.pdf'
   },
   {
     id: '6',
     title: 'Сертификат Лемакс (Element)',
     number: '№ ЕАЭС RU C-RU.АД87.В.00312/22',
     equipment: 'Аппараты отопительные Element, Aspect',
-    pages: ['https://picsum.photos/seed/cert6/800/1200']
+    url: '/cert6.pdf'
   },
   {
     id: '7',
     title: 'Сертификат Лемакс (Omega)',
     number: '№ ЕАЭС RU C-RU.АД85.В.00327/21',
     equipment: 'Котлы газовые отопительные Omega',
-    pages: ['https://picsum.photos/seed/cert7/800/1200']
+    url: '/cert7.pdf'
   },
   {
     id: '8',
     title: 'Сертификат Thermex (Водонагреватели)',
     number: '№ ЕАЭС RU C-RU.HB26.B.04242/24',
     equipment: 'Водонагреватели аккумуляционные электрические',
-    pages: ['https://picsum.photos/seed/cert8/800/1200', 'https://picsum.photos/seed/cert8-2/800/1200', 'https://picsum.photos/seed/cert8-3/800/1200', 'https://picsum.photos/seed/cert8-4/800/1200', 'https://picsum.photos/seed/cert8-5/800/1200']
+    url: '/cert8.pdf'
   },
   {
     id: '9',
     title: 'Сертификат Thermex (Котлы)',
     number: '№ ЕАЭС RU C-CN.АБ53.В.05683/22',
     equipment: 'Электрические котлы Grizzly, Skif, Tesla',
-    pages: ['https://picsum.photos/seed/cert9/800/1200', 'https://picsum.photos/seed/cert9-2/800/1200', 'https://picsum.photos/seed/cert9-3/800/1200']
+    url: '/cert9.pdf'
   }
 ];
 
@@ -91,6 +94,11 @@ interface CertificatesProps {
 
 const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
+  const [numPages, setNumPages] = useState<number | null>(null);
+
+  function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
+    setNumPages(numPages);
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -131,15 +139,24 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
               className="group bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden cursor-pointer hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
               onClick={() => setSelectedCert(cert)}
             >
-              <div className="aspect-[3/4] relative overflow-hidden bg-white border-b border-gray-100">
-                <img 
-                  src={cert.pages[0]} 
-                  alt={cert.title}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center">
-                  <div className="bg-white text-[#0b2a4a] p-3 rounded-full shadow-xl scale-0 group-hover:scale-100 transition-transform duration-300">
-                    <Maximize2 size={24} />
+              <div className="aspect-[3/4] relative overflow-hidden bg-white border-b border-gray-100 flex items-center justify-center">
+                <div className="w-full h-full pointer-events-none overflow-hidden flex items-start justify-center">
+                  <Document
+                    file={cert.url}
+                    loading={<div className="p-8 text-gray-400">Загрузка...</div>}
+                  >
+                    <Page 
+                      pageNumber={1} 
+                      width={400} 
+                      renderTextLayer={false} 
+                      renderAnnotationLayer={false}
+                    />
+                  </Document>
+                </div>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors flex items-center justify-center z-20">
+                  <div className="bg-white text-[#0b2a4a] p-3 rounded-full shadow-xl scale-0 group-hover:scale-100 transition-transform duration-300 flex items-center gap-2 px-6">
+                    <span className="text-sm font-bold">Открыть PDF</span>
+                    <Maximize2 size={18} />
                   </div>
                 </div>
               </div>
@@ -158,7 +175,7 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
           <div className="absolute inset-0 bg-[#0b2a4a]/90 backdrop-blur-sm" onClick={() => setSelectedCert(null)}></div>
           
-          <div className="relative bg-white w-full max-w-2xl h-full max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-300">
+          <div className="relative bg-white w-full max-w-4xl h-full max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-300">
             {/* Modal Header */}
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
               <div>
@@ -166,9 +183,14 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
                 <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{selectedCert.number}</p>
               </div>
               <div className="flex items-center gap-2">
-                <button className="p-2 text-gray-400 hover:text-[#b22222] transition-colors">
+                <a 
+                  href={selectedCert.url}
+                  download
+                  className="p-2 text-gray-400 hover:text-[#b22222] transition-colors"
+                  title="Скачать PDF"
+                >
                   <Download size={20} />
-                </button>
+                </a>
                 <button 
                   onClick={() => setSelectedCert(null)}
                   className="p-2 bg-gray-100 text-gray-500 rounded-full hover:bg-[#b22222] hover:text-white transition-all"
@@ -178,23 +200,38 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
               </div>
             </div>
 
-            {/* Modal Content - Scrollable Images */}
-            <div className="flex-grow overflow-y-auto p-4 md:p-8 space-y-4 bg-gray-100 custom-scrollbar">
-              {selectedCert.pages.map((page, idx) => (
-                <div key={idx} className="relative bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200">
-                  <div className="absolute top-4 left-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur-md font-bold">
-                    Стр. {idx + 1}
+            {/* Modal Content - Scrollable PDF Viewer */}
+            <div className="flex-grow overflow-y-auto p-4 md:p-8 space-y-8 bg-gray-100 custom-scrollbar flex flex-col items-center">
+              <Document
+                file={selectedCert.url}
+                onLoadSuccess={onDocumentLoadSuccess}
+                loading={<div className="p-8 text-gray-400">Загрузка документа...</div>}
+                className="flex flex-col gap-8 items-center w-full"
+              >
+                {Array.from(new Array(numPages || 0), (el, index) => (
+                  <div key={`page_${index + 1}`} className="relative bg-white shadow-xl rounded-lg overflow-hidden border border-gray-200 max-w-full">
+                    <div className="absolute top-4 left-4 bg-black/50 text-white text-[10px] px-2 py-1 rounded backdrop-blur-md font-bold z-10">
+                      Стр. {index + 1}
+                    </div>
+                    <Page 
+                      pageNumber={index + 1} 
+                      width={800}
+                      renderTextLayer={false}
+                      renderAnnotationLayer={false}
+                      className="max-w-full"
+                    />
                   </div>
-                  <img src={page} alt={`Page ${idx + 1}`} className="w-full h-auto" />
-                </div>
-              ))}
+                ))}
+              </Document>
               
-              <div className="py-12 text-center">
-                <div className="inline-flex flex-col items-center gap-2 text-gray-400">
-                  <ArrowDown size={24} className="animate-bounce" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest">Конец документа</span>
+              {numPages && (
+                <div className="py-12 text-center w-full">
+                  <div className="inline-flex flex-col items-center gap-2 text-gray-400">
+                    <ArrowDown size={24} className="animate-bounce" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Конец документа</span>
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Modal Footer */}
@@ -209,8 +246,6 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
           </div>
         </div>
       )}
-
-      {/* Footer */}
       <footer className="bg-gray-50 py-12 border-t border-gray-100">
         <div className="container mx-auto px-4 text-center">
           <p className="text-[#0b2a4a] font-bold mb-4">ЧИК — Челябинская Инженерная Компания</p>

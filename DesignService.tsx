@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   ChevronLeft, 
   DraftingCompass, 
@@ -14,12 +14,14 @@ import {
   MapPin,
   ExternalLink
 } from 'lucide-react';
+import ContactModal from './src/ContactModal';
 
 interface DesignServiceProps {
   onBack: () => void;
 }
 
 const DesignService: React.FC<DesignServiceProps> = ({ onBack }) => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const stages = [
     { title: "Анализ объекта", desc: "Выезд специалиста, замеры, оценка материалов стен и теплоизоляции.", why: "Собрать точные данные для корректных расчетов." },
     { title: "Расчет теплопотерь", desc: "Теплотехнический расчет для каждой комнаты с учетом климата.", why: "Определить необходимую мощность оборудования." },
@@ -202,13 +204,22 @@ const DesignService: React.FC<DesignServiceProps> = ({ onBack }) => {
           
           <div className="mt-20 text-center">
             <p className="text-gray-500 mb-8">Мы поможем подобрать оптимальную команду проектировщиков под ваш бюджет и задачи.</p>
-            <button className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-xl inline-flex items-center gap-3">
+            <button 
+              onClick={() => setIsContactModalOpen(true)}
+              className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-xl inline-flex items-center gap-3"
+            >
               Получить консультацию
               <ArrowRight size={20} />
             </button>
           </div>
         </div>
       </section>
+
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+        title="Получить консультацию по проектированию"
+      />
 
       {/* Footer */}
       <footer className="bg-gray-50 py-12 border-t border-gray-100">

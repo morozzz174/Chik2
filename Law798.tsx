@@ -8,6 +8,7 @@ const Law798: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       onBack={onBack}
       title="Постановление Правительства РФ № 798"
       subtitle="Об утверждении правил пользования газом при проектировании и эксплуатации оборудования"
+      pdfUrl="/law798.pdf"
       content={
         <div className="space-y-8">
           <section>

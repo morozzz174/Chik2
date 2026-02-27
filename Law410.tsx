@@ -8,6 +8,7 @@ const Law410: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       onBack={onBack}
       title="Постановление Правительства РФ № 410"
       subtitle="О мерах по обеспечению безопасности при использовании и содержании ВДГО и ВКГО"
+      pdfUrl="/law410.pdf"
       content={
         <div className="space-y-8">
           <section>

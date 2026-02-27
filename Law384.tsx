@@ -8,6 +8,7 @@ const Law384: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       onBack={onBack}
       title="Федеральный закон № 384-ФЗ"
       subtitle="Технический регламент о безопасности зданий и сооружений"
+      pdfUrl="/law384.pdf"
       content={
         <div className="space-y-8">
           <section>

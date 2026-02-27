@@ -8,6 +8,7 @@ const Law624: React.FC<{ onBack: () => void }> = ({ onBack }) => {
       onBack={onBack}
       title="Приказ Минрегиона РФ № 624"
       subtitle="Перечень видов работ в строительстве, требующих наличие допуска СРО"
+      pdfUrl="/law624.pdf"
       content={
         <div className="space-y-8">
           <section>

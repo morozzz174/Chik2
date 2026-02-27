@@ -7,9 +7,10 @@ interface LawPageProps {
   subtitle: string;
   content: React.ReactNode;
   onBack: () => void;
+  pdfUrl?: string;
 }
 
-const LawPage: React.FC<LawPageProps> = ({ title, subtitle, content, onBack }) => {
+const LawPage: React.FC<LawPageProps> = ({ title, subtitle, content, onBack, pdfUrl }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
@@ -40,10 +41,16 @@ const LawPage: React.FC<LawPageProps> = ({ title, subtitle, content, onBack }) =
               </div>
             </div>
             <div className="flex gap-4">
-              <button className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-[#0b2a4a] transition-colors">
-                <Download size={14} />
-                Скачать PDF
-              </button>
+              {pdfUrl && (
+                <a 
+                  href={pdfUrl}
+                  download
+                  className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-[#0b2a4a] transition-colors"
+                >
+                  <Download size={14} />
+                  Скачать PDF
+                </a>
+              )}
               <button className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-[#0b2a4a] transition-colors">
                 <Share2 size={14} />
                 Поделиться

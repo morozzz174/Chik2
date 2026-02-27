@@ -15,7 +15,9 @@ import {
   ClipboardCheck,
   Calculator,
   DraftingCompass,
-  HelpCircle
+  HelpCircle,
+  Maximize2,
+  X
 } from 'lucide-react';
 import { 
   TURNKEY_SOLUTIONS, 
@@ -183,148 +185,191 @@ const StickyNav = ({ onOpenGasReq, onOpenDesign }: { onOpenGasReq: () => void, o
   </nav>
 );
 
-const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => (
-  <section id="turnkey" className="py-20 bg-white">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4">5 Решений "Под Ключ" для ИЖС</h2>
-        <div className="w-24 h-1.5 bg-[#b22222] mx-auto"></div>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-        {TURNKEY_SOLUTIONS.map((solution) => (
-          <div 
-            key={solution.id}
-            className="group relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
-            onClick={() => onOpenSolution(solution.id)}
-          >
-            <div className="relative h-48 overflow-hidden">
-              <img 
-                src={solution.image} 
-                alt={solution.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute top-4 left-4 bg-[#b22222] text-white text-xs font-bold px-2 py-1 rounded uppercase">
-                {solution.category}
+const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => {
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  return (
+    <section id="turnkey" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4">5 Решений "Под Ключ" для ИЖС</h2>
+          <div className="w-24 h-1.5 bg-[#b22222] mx-auto"></div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          {TURNKEY_SOLUTIONS.map((solution) => (
+            <div 
+              key={solution.id}
+              className="group relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
+              onClick={() => onOpenSolution(solution.id)}
+            >
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={solution.image} 
+                  alt={solution.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-[#b22222] text-white text-xs font-bold px-2 py-1 rounded uppercase z-10">
+                  {solution.category}
+                </div>
+                <div 
+                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxImage(solution.image);
+                  }}
+                >
+                  <Maximize2 className="text-white" size={24} />
+                </div>
               </div>
-            </div>
-            
-            <div className="p-6 flex-grow flex flex-col">
-              <h3 className="text-xl font-bold text-[#0b2a4a] mb-2">{solution.title}</h3>
-              <p className="text-sm font-semibold text-gray-500 mb-4">{solution.objectType}</p>
               
-              <div className="mb-4 text-xs">
-                <p className="font-bold text-[#b22222]">Мощность:</p>
-                <p className="text-gray-700">{solution.power}</p>
-              </div>
+              <div className="p-6 flex-grow flex flex-col">
+                <h3 className="text-xl font-bold text-[#0b2a4a] mb-2">{solution.title}</h3>
+                <p className="text-sm font-semibold text-gray-500 mb-4">{solution.objectType}</p>
+                
+                <div className="mb-4 text-xs">
+                  <p className="font-bold text-[#b22222]">Мощность:</p>
+                  <p className="text-gray-700">{solution.power}</p>
+                </div>
 
-              <ul className="text-xs space-y-2 mb-6 flex-grow">
-                {solution.components.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-gray-600">
-                    <ChevronRight size={14} className="text-[#b22222] shrink-0" />
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="text-xs space-y-2 mb-6 flex-grow">
+                  {solution.components.map((c, i) => (
+                    <li key={i} className="flex items-start gap-2 text-gray-600">
+                      <ChevronRight size={14} className="text-[#b22222] shrink-0" />
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="pt-4 border-t border-gray-50 text-[10px] italic text-gray-400">
-                {solution.justification}
+                <div className="pt-4 border-t border-gray-50 text-[10px] italic text-gray-400">
+                  {solution.justification}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
 
-const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => (
-  <section id="no-gas" className="py-20 bg-gray-50">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4">5 Решений "Под Ключ" для объектов без Газа</h2>
-        <div className="w-24 h-1.5 bg-[#b22222] mx-auto"></div>
-        <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
-          Автономные системы отопления для Челябинской области: от малых дач до крупных промышленных цехов.
-        </p>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
-        {NO_GAS_SOLUTIONS.map((solution) => (
-          <div 
-            key={solution.id}
-            className="group relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
-            onClick={() => onOpenSolution(solution.id)}
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
+          <button 
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
           >
-            <div className="relative h-48 overflow-hidden">
-              <img 
-                src={solution.image} 
-                alt={solution.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute top-4 left-4 bg-[#b22222] text-white text-[10px] font-bold px-2 py-1 rounded uppercase">
-                {solution.category}
+            <X size={32} />
+          </button>
+          <img 
+            src={lightboxImage} 
+            alt="Enlarged view" 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
+  );
+};
+
+const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => {
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+
+  return (
+    <section id="no-gas" className="py-20 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4">5 Решений "Под Ключ" для объектов без Газа</h2>
+          <div className="w-24 h-1.5 bg-[#b22222] mx-auto"></div>
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto">
+            Автономные системы отопления для Челябинской области: от малых дач до крупных промышленных цехов.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
+          {NO_GAS_SOLUTIONS.map((solution) => (
+            <div 
+              key={solution.id}
+              className="group relative bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer flex flex-col h-full"
+              onClick={() => onOpenSolution(solution.id)}
+            >
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={solution.image} 
+                  alt={solution.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-[#b22222] text-white text-[10px] font-bold px-2 py-1 rounded uppercase z-10">
+                  {solution.category}
+                </div>
+                <div 
+                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setLightboxImage(solution.image);
+                  }}
+                >
+                  <Maximize2 className="text-white" size={24} />
+                </div>
               </div>
-            </div>
-            
-            <div className="p-6 flex-grow flex flex-col">
-              <h3 className="text-lg font-bold text-[#0b2a4a] mb-2 leading-tight">{solution.title}</h3>
-              <p className="text-xs font-semibold text-gray-500 mb-4">{solution.objectType}</p>
               
-              <div className="mb-4 text-xs">
-                <p className="font-bold text-[#b22222]">Мощность:</p>
-                <p className="text-gray-700">{solution.power}</p>
-              </div>
+              <div className="p-6 flex-grow flex flex-col">
+                <h3 className="text-lg font-bold text-[#0b2a4a] mb-2 leading-tight">{solution.title}</h3>
+                <p className="text-xs font-semibold text-gray-500 mb-4">{solution.objectType}</p>
+                
+                <div className="mb-4 text-xs">
+                  <p className="font-bold text-[#b22222]">Мощность:</p>
+                  <p className="text-gray-700">{solution.power}</p>
+                </div>
 
-              <ul className="text-xs space-y-2 mb-6 flex-grow">
-                {solution.components.map((c, i) => (
-                  <li key={i} className="flex items-start gap-2 text-gray-600">
-                    <ChevronRight size={14} className="text-[#b22222] shrink-0" />
-                    <span>{c}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="text-xs space-y-2 mb-6 flex-grow">
+                  {solution.components.map((c, i) => (
+                    <li key={i} className="flex items-start gap-2 text-gray-600">
+                      <ChevronRight size={14} className="text-[#b22222] shrink-0" />
+                      <span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <div className="pt-4 border-t border-gray-50 text-[10px] italic text-gray-400">
-                {solution.justification}
+                <div className="pt-4 border-t border-gray-50 text-[10px] italic text-gray-400">
+                  {solution.justification}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100 overflow-x-auto">
-        <h3 className="text-2xl font-bold text-[#0b2a4a] mb-8 text-center">Сравнительная таблица по сегментам</h3>
-        <table className="w-full text-sm text-left">
-          <thead className="bg-[#0b2a4a] text-white">
-            <tr>
-              <th className="p-4 rounded-tl-lg">Сегмент</th>
-              <th className="p-4">Лучшее по цене</th>
-              <th className="p-4">Лучшее по экономии</th>
-              <th className="p-4 rounded-tr-lg">Лучшее по автономии</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            <tr className="hover:bg-gray-50">
-              <td className="p-4 font-bold">50-100 м²</td>
-              <td className="p-4">Электрокотел ZOTA (35 т.р.)</td>
-              <td className="p-4">Теплонасос Энергия (320 т.р.)</td>
-              <td className="p-4">Пеллетный ZOTA-15S (210 т.р.)</td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="p-4 font-bold">100-200 м²</td>
-              <td className="p-4">Эван NEXT (40 т.р.)</td>
-              <td className="p-4">Mitsubishi Zubadan (890 т.р.)</td>
-              <td className="p-4">ZOTA Pellet-25A (320 т.р.)</td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="p-4 font-bold">200-400 м²</td>
-              <td className="p-4">Эван каскад + буфер</td>
-              <td className="p-4">Геотермальный (1.2 млн)</td>
-              <td className="p-4">Каскад ZOTA (840 т.р.)</td>
-            </tr>
-            <tr className="hover:bg-gray-50">
-              <td className="p-4 font-bold">400-600 м²</td>
+        <div className="bg-white p-8 rounded-xl shadow-xl border border-gray-100 overflow-x-auto">
+          <h3 className="text-2xl font-bold text-[#0b2a4a] mb-8 text-center">Сравнительная таблица по сегментам</h3>
+          <table className="w-full text-sm text-left">
+            <thead className="bg-[#0b2a4a] text-white">
+              <tr>
+                <th className="p-4 rounded-tl-lg">Сегмент</th>
+                <th className="p-4">Лучшее по цене</th>
+                <th className="p-4">Лучшее по экономии</th>
+                <th className="p-4 rounded-tr-lg">Лучшее по автономии</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              <tr className="hover:bg-gray-50">
+                <td className="p-4 font-bold">50-100 м²</td>
+                <td className="p-4">Электрокотел ZOTA (35 т.р.)</td>
+                <td className="p-4">Теплонасос Энергия (320 т.р.)</td>
+                <td className="p-4">Пеллетный ZOTA-15S (210 т.р.)</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="p-4 font-bold">100-200 м²</td>
+                <td className="p-4">Эван NEXT (40 т.р.)</td>
+                <td className="p-4">Mitsubishi Zubadan (890 т.р.)</td>
+                <td className="p-4">ZOTA Pellet-25A (320 т.р.)</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="p-4 font-bold">200-400 м²</td>
+                <td className="p-4">Эван каскад + буфер</td>
+                <td className="p-4">Геотермальный (1.2 млн)</td>
+                <td className="p-4">Каскад ZOTA (840 т.р.)</td>
+              </tr>
+              <tr className="hover:bg-gray-50">
+                <td className="p-4 font-bold">400-600 м²</td>
               <td className="p-4">Электрокотел пром (350 т.р.)</td>
               <td className="p-4">Геотермальное поле (3-5 млн)</td>
               <td className="p-4">Микро-ТЭЦ (2.5-4 млн)</td>
@@ -420,71 +465,94 @@ const TrustBlock = () => (
   </section>
 );
 
-const ExpertiseCatalog = () => (
-  <section id="expertise" className="py-20 bg-white">
-    <div className="container mx-auto px-4">
-      <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4 uppercase tracking-tight">10 Направлений экспертизы</h2>
-        <div className="w-32 h-1.5 bg-[#b22222] mx-auto"></div>
-      </div>
+const ExpertiseCatalog = () => {
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
-      <div className="space-y-24">
-        {EXPERTISE_SECTIONS.map((section, idx) => (
-          <div key={section.id} className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-            <div className={`${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
-              <div className="sticky top-28">
-                <span className="text-6xl font-black text-gray-100 block mb-4">0{idx + 1}</span>
-                <h3 className="text-2xl font-bold text-[#0b2a4a] mb-6">{section.title}</h3>
-                
-                <div className="space-y-4 mb-8">
-                  {section.params.map((p, i) => (
-                    <div key={i} className="border-b border-gray-100 pb-2">
-                      <p className="text-xs font-bold text-[#b22222] uppercase">{p.label}</p>
-                      <p className="text-sm text-gray-700">{p.value}</p>
-                    </div>
-                  ))}
-                </div>
+  return (
+    <section id="expertise" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2a4a] mb-4 uppercase tracking-tight">10 Направлений экспертизы</h2>
+          <div className="w-32 h-1.5 bg-[#b22222] mx-auto"></div>
+        </div>
 
-                {section.brands && (
-                  <div className="flex flex-wrap gap-2">
-                    {section.brands.map(brand => (
-                      <span key={brand} className="bg-gray-100 px-3 py-1 rounded text-[10px] font-bold text-gray-500 uppercase">
-                        {brand}
-                      </span>
+        <div className="space-y-24">
+          {EXPERTISE_SECTIONS.map((section, idx) => (
+            <div key={section.id} className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+              <div className={`${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
+                <div className="sticky top-28">
+                  <span className="text-6xl font-black text-gray-100 block mb-4">0{idx + 1}</span>
+                  <h3 className="text-2xl font-bold text-[#0b2a4a] mb-6">{section.title}</h3>
+                  
+                  <div className="space-y-4 mb-8">
+                    {section.params.map((p, i) => (
+                      <div key={i} className="border-b border-gray-100 pb-2">
+                        <p className="text-xs font-bold text-[#b22222] uppercase">{p.label}</p>
+                        <p className="text-sm text-gray-700">{p.value}</p>
+                      </div>
                     ))}
                   </div>
-                )}
-              </div>
-            </div>
 
-            <div className="lg:col-span-2">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                {[...Array(10)].map((_, i) => (
-                  <a 
-                    key={i}
-                    href={`https://picsum.photos/seed/${section.id}-${i}/1200/800`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="aspect-square bg-gray-200 overflow-hidden relative group"
-                  >
-                    <img 
-                      src={`https://picsum.photos/seed/${section.id}-${i}/400/400`}
-                      alt={`Gallery ${i}`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <ChevronRight className="text-white" />
+                  {section.brands && (
+                    <div className="flex flex-wrap gap-2">
+                      {section.brands.map(brand => (
+                        <span key={brand} className="bg-gray-100 px-3 py-1 rounded text-[10px] font-bold text-gray-500 uppercase">
+                          {brand}
+                        </span>
+                      ))}
                     </div>
-                  </a>
-                ))}
+                  )}
+                </div>
+              </div>
+
+              <div className="lg:col-span-2">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
+                  {[...Array(10)].map((_, i) => {
+                    const highResUrl = `https://picsum.photos/seed/${section.id}-${i}/1200/800`;
+                    return (
+                      <div 
+                        key={i}
+                        onClick={() => setLightboxImage(highResUrl)}
+                        className="aspect-square bg-gray-200 overflow-hidden relative group cursor-pointer"
+                      >
+                        <img 
+                          src={`https://picsum.photos/seed/${section.id}-${i}/400/400`}
+                          alt={`Gallery ${i}`}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <Maximize2 className="text-white" size={24} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+
+      {/* Lightbox */}
+      {lightboxImage && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
+          <button 
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+          >
+            <X size={32} />
+          </button>
+          <img 
+            src={lightboxImage} 
+            alt="Enlarged view" 
+            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </section>
+  );
+};
 
 const Footer = ({ onOpenDesign, onOpenContact }: { onOpenDesign: () => void, onOpenContact: () => void }) => (
   <footer className="bg-[#0b2a4a] text-white py-16">
