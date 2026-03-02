@@ -19,7 +19,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Коаксиальный дымоход (нержавейка)'
     ],
     justification: 'Для домов до 100 м² газовое отопление экономически эффективнее электрического при наличии магистрали.',
-    image: 'https://i.postimg.cc/FY9p1h38/econom-gaz.jpg'
+    image: 'https://i.postimg.cc/FY9p1h38/econom-gaz.jpg',
+    gallery: ['https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg', 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg']
   },
   {
     id: 'std',
@@ -33,7 +34,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 3 кВт + 2x LiFePo4 100Ач'
     ],
     justification: 'Конденсационные котлы достигают КПД до 98%, напрямую снижая затраты на топливо.',
-    image: 'https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg'
+    image: 'https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg',
+    gallery: ['https://i.postimg.cc/FY9p1h38/econom-gaz.jpg', 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg']
   },
   {
     id: 'prm',
@@ -47,7 +49,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 10 кВт + станция LiFePo4 15 кВт*ч'
     ],
     justification: 'Независимость от сетей критична в пик зимы при возможных авариях на ЛЭП.',
-    image: 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg'
+    image: 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg',
+    gallery: ['https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg', 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg']
   },
   {
     id: 'htech',
@@ -61,7 +64,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Утилизация тепла двигателя'
     ],
     justification: 'КПД до 95%. Генерация "бесплатного" электричества окупает систему за 3-5 лет.',
-    image: 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg'
+    image: 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg',
+    gallery: ['https://i.postimg.cc/21zG3Cht/premium-gaz.jpg', 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg']
   },
   {
     id: 'ind',
@@ -75,7 +79,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Резервное топливное хозяйство (ПП №798)'
     ],
     justification: 'Своя генерация дешевле подключения к ЛЭП для удаленных объектов.',
-    image: 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg'
+    image: 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg',
+    gallery: ['https://i.postimg.cc/21zG3Cht/premium-gaz.jpg', 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg']
   }
 ];
 
@@ -92,7 +97,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Монтаж за 1-2 дня, без дымохода'
     ],
     justification: 'Самое быстрое и дешевое решение. ZOTA надежно работает при перепадах напряжения в поселках.',
-    image: 'https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg'
+    image: 'https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg',
+    gallery: ['https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
   },
   {
     id: 'ng-opt',
@@ -106,7 +112,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Экономия в 3-4 раза выше электрокотла'
     ],
     justification: 'Лучший баланс цены и экономичности. Окупаемость 4-5 лет за счет низкого энергопотребления.',
-    image: 'https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg'
+    image: 'https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg',
+    gallery: ['https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
   },
   {
     id: 'ng-prm',
@@ -120,7 +127,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Стабильное тепло в любые морозы'
     ],
     justification: 'Максимальная эффективность круглый год. Земля на глубине всегда +5-7°C. Срок службы 30+ лет.',
-    image: 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg'
+    image: 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg',
+    gallery: ['https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg', 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg']
   },
   {
     id: 'ng-ind',
@@ -134,7 +142,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Гибридный инвертор "Солнечный ветер"'
     ],
     justification: 'Снижение пиковых нагрузок. Солнечные панели летом полностью покрывают ГВС и кондиционирование.',
-    image: 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg'
+    image: 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg',
+    gallery: ['https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg', 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg']
   },
   {
     id: 'ng-pellet',
@@ -148,7 +157,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Факельная горелка, авторозжиг'
     ],
     justification: 'Идеально для производств с отходами деревообработки. Окупаемость 2-4 года при наличии отходов.',
-    image: 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg'
+    image: 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg',
+    gallery: ['https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
   }
 ];
 

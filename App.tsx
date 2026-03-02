@@ -17,7 +17,8 @@ import {
   DraftingCompass,
   HelpCircle,
   Maximize2,
-  X
+  X,
+  Award
 } from 'lucide-react';
 import { 
   TURNKEY_SOLUTIONS, 
@@ -46,8 +47,9 @@ import Certificates from './Certificates';
 import DesignService from './DesignService';
 import EquipmentFAQ from './EquipmentFAQ';
 import ContactModal from './src/ContactModal';
+import PresentationModal from './src/PresentationModal';
 
-const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
+const Header = ({ onOpenContact, onOpenPresentation }: { onOpenContact: () => void, onOpenPresentation: () => void }) => (
   <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
       <div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
@@ -60,7 +62,14 @@ const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4">
+        <button 
+          onClick={onOpenPresentation}
+          className="hidden md:flex items-center gap-2 text-[#0b2a4a] font-bold hover:text-[#b22222] transition-colors border-r border-gray-200 pr-4 mr-4"
+        >
+          <Award size={20} className="text-[#b22222]" />
+          <span>Презентация</span>
+        </button>
         <a href="tel:+73512309996" className="flex items-center gap-2 text-[#0b2a4a] font-bold text-lg hover:text-[#b22222] transition-colors">
           <Phone size={20} />
           <span>+7 (351) 230-99-96</span>
@@ -73,7 +82,7 @@ const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
   </header>
 );
 
-const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign }: { onOpenGasReq: () => void, onOpenPriceList: () => void, onOpenCertificates: () => void, onOpenDesign: () => void }) => (
+const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign, onOpenPresentation }: { onOpenGasReq: () => void, onOpenPriceList: () => void, onOpenCertificates: () => void, onOpenDesign: () => void, onOpenPresentation: () => void }) => (
   <section className="relative h-[70vh] flex items-center bg-gray-900 overflow-hidden">
     <img 
       src="https://picsum.photos/seed/engineer/1920/1080" 
@@ -92,43 +101,23 @@ const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign 
         </p>
         <div className="flex flex-wrap gap-4">
           <button 
+            onClick={onOpenPresentation}
+            className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl flex items-center gap-2"
+          >
+            <Award size={24} />
+            Смотреть презентацию
+          </button>
+          <button 
             onClick={() => document.getElementById('turnkey')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-            className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl"
+            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
           >
             Смотреть решения
           </button>
           <button 
             onClick={onOpenCertificates}
-            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
+            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all"
           >
             Наши сертификаты
-          </button>
-          <button 
-            onClick={onOpenGasReq}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
-          >
-            <ClipboardCheck size={24} />
-            Требования для ГАЗА
-          </button>
-          <button 
-            onClick={onOpenPriceList}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
-          >
-            <Calculator size={24} />
-            Прайс услуги
-          </button>
-          <button 
-            onClick={() => document.getElementById('no-gas')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
-          >
-            Смотреть решения без ГАЗА
-          </button>
-          <button 
-            onClick={onOpenDesign}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
-          >
-            <DraftingCompass size={24} />
-            Проектирование
           </button>
         </div>
       </div>
@@ -186,7 +175,7 @@ const StickyNav = ({ onOpenGasReq, onOpenDesign }: { onOpenGasReq: () => void, o
 );
 
 const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxData, setLightboxData] = useState<{ images: string[], index: number } | null>(null);
 
   return (
     <section id="turnkey" className="py-20 bg-white">
@@ -216,7 +205,8 @@ const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => vo
                   className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setLightboxImage(solution.image);
+                    const gallery = [solution.image, ...(solution.gallery || [])];
+                    setLightboxData({ images: gallery, index: 0 });
                   }}
                 >
                   <Maximize2 className="text-white" size={24} />
@@ -250,21 +240,57 @@ const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => vo
         </div>
       </div>
 
-      {/* Lightbox */}
-      {lightboxImage && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-sm" onClick={() => setLightboxImage(null)}>
+      {/* Lightbox Gallery */}
+      {lightboxData && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-md" onClick={() => setLightboxData(null)}>
           <button 
-            onClick={() => setLightboxImage(null)}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10"
+            onClick={() => setLightboxData(null)}
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10 p-2 hover:bg-white/10 rounded-full"
           >
             <X size={32} />
           </button>
-          <img 
-            src={lightboxImage} 
-            alt="Enlarged view" 
-            className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
-            onClick={(e) => e.stopPropagation()}
-          />
+          
+          <div className="relative w-full max-w-6xl flex flex-col items-center gap-8" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-center w-full gap-4">
+              {/* Previous Button */}
+              <button 
+                className="p-4 text-white/50 hover:text-white transition-colors"
+                onClick={() => setLightboxData(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null)}
+              >
+                <ChevronRight size={48} className="rotate-180" />
+              </button>
+
+              {/* Main Image */}
+              <div className="relative flex-1 flex justify-center items-center">
+                <img 
+                  src={lightboxData.images[lightboxData.index]} 
+                  alt="Enlarged view" 
+                  className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
+                />
+              </div>
+
+              {/* Next Button */}
+              <button 
+                className="p-4 text-white/50 hover:text-white transition-colors"
+                onClick={() => setLightboxData(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null)}
+              >
+                <ChevronRight size={48} />
+              </button>
+            </div>
+
+            {/* Thumbnails / Gallery View */}
+            <div className="flex gap-4 overflow-x-auto p-2">
+              {lightboxData.images.map((img, i) => (
+                <button 
+                  key={i}
+                  onClick={() => setLightboxData({ ...lightboxData, index: i })}
+                  className={`relative w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden border-2 transition-all ${i === lightboxData.index ? 'border-[#b22222] scale-105' : 'border-transparent opacity-50 hover:opacity-100'}`}
+                >
+                  <img src={img} className="w-full h-full object-cover" alt={`Thumb ${i}`} />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </section>
@@ -272,7 +298,7 @@ const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => vo
 };
 
 const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void }) => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxData, setLightboxData] = useState<{ images: string[], index: number } | null>(null);
 
   return (
     <section id="no-gas" className="py-20 bg-gray-50">
@@ -305,7 +331,8 @@ const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void
                   className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setLightboxImage(solution.image);
+                    const gallery = [solution.image, ...(solution.gallery || [])];
+                    setLightboxData({ images: gallery, index: 0 });
                   }}
                 >
                   <Maximize2 className="text-white" size={24} />
@@ -431,8 +458,63 @@ const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void
         </div>
       </div>
     </div>
+
+    {/* Lightbox Gallery */}
+    {lightboxData && (
+      <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-black/95 backdrop-blur-md" onClick={() => setLightboxData(null)}>
+        <button 
+          onClick={() => setLightboxData(null)}
+          className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10 p-2 hover:bg-white/10 rounded-full"
+        >
+          <X size={32} />
+        </button>
+        
+        <div className="relative w-full max-w-6xl flex flex-col items-center gap-8" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center justify-center w-full gap-4">
+            {/* Previous Button */}
+            <button 
+              className="p-4 text-white/50 hover:text-white transition-colors"
+              onClick={() => setLightboxData(prev => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : null)}
+            >
+              <ChevronRight size={48} className="rotate-180" />
+            </button>
+
+            {/* Main Image */}
+            <div className="relative flex-1 flex justify-center items-center">
+              <img 
+                src={lightboxData.images[lightboxData.index]} 
+                alt="Enlarged view" 
+                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
+              />
+            </div>
+
+            {/* Next Button */}
+            <button 
+              className="p-4 text-white/50 hover:text-white transition-colors"
+              onClick={() => setLightboxData(prev => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : null)}
+            >
+              <ChevronRight size={48} />
+            </button>
+          </div>
+
+          {/* Thumbnails */}
+          <div className="flex gap-4 overflow-x-auto p-2">
+            {lightboxData.images.map((img, i) => (
+              <button 
+                key={i}
+                onClick={() => setLightboxData({ ...lightboxData, index: i })}
+                className={`relative w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden border-2 transition-all ${i === lightboxData.index ? 'border-[#b22222] scale-105' : 'border-transparent opacity-50 hover:opacity-100'}`}
+              >
+                <img src={img} className="w-full h-full object-cover" alt={`Thumb ${i}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
   </section>
-);
+  );
+};
 
 const TrustBlock = () => (
   <section id="trust" className="py-20 bg-gray-50">
@@ -508,7 +590,7 @@ const ExpertiseCatalog = () => {
               <div className="lg:col-span-2">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                   {[...Array(10)].map((_, i) => {
-                    const highResUrl = `https://picsum.photos/seed/${section.id}-${i}/1200/800`;
+                    const highResUrl = `https://picsum.photos/seed/${section.id}-${i}/1920/1080`;
                     return (
                       <div 
                         key={i}
@@ -516,7 +598,7 @@ const ExpertiseCatalog = () => {
                         className="aspect-square bg-gray-200 overflow-hidden relative group cursor-pointer"
                       >
                         <img 
-                          src={`https://picsum.photos/seed/${section.id}-${i}/400/400`}
+                          src={`https://picsum.photos/seed/${section.id}-${i}/800/800`}
                           alt={`Gallery ${i}`}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
@@ -630,6 +712,7 @@ const Footer = ({ onOpenDesign, onOpenContact }: { onOpenDesign: () => void, onO
 export default function App() {
   const [view, setView] = useState<'home' | 'gas-requirements' | 'price-list' | 'solution-eco' | 'solution-optimal' | 'solution-premium' | 'solution-cogen' | 'solution-industrial' | 'solution-ng-eco' | 'solution-ng-opt' | 'solution-ng-prm' | 'solution-ng-hitech' | 'solution-ng-comm' | 'law-410' | 'law-798' | 'law-624' | 'law-384' | 'certificates' | 'design' | 'equipment-faq'>('home');
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isPresentationOpen, setIsPresentationOpen] = useState(false);
   const [contactModalTitle, setContactModalTitle] = useState('Заказать расчет');
 
   const openContactModal = (title: string) => {
@@ -751,13 +834,17 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onOpenContact={() => openContactModal('Заказать расчет')} />
+      <Header 
+        onOpenContact={() => openContactModal('Заказать расчет')} 
+        onOpenPresentation={() => setIsPresentationOpen(true)}
+      />
       <main className="flex-grow">
         <Hero 
           onOpenGasReq={() => setView('gas-requirements')} 
           onOpenPriceList={() => setView('price-list')}
           onOpenCertificates={() => setView('certificates')}
           onOpenDesign={() => { setView('design'); window.scrollTo(0, 0); }}
+          onOpenPresentation={() => setIsPresentationOpen(true)}
         />
         <StickyNav 
           onOpenGasReq={() => { setView('gas-requirements'); window.scrollTo(0, 0); }}
@@ -800,6 +887,10 @@ export default function App() {
         isOpen={isContactModalOpen} 
         onClose={() => setIsContactModalOpen(false)} 
         title={contactModalTitle}
+      />
+      <PresentationModal 
+        isOpen={isPresentationOpen} 
+        onClose={() => setIsPresentationOpen(false)} 
       />
     </div>
   );

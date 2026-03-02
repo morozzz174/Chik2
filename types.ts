@@ -8,6 +8,7 @@ export interface TurnkeySolution {
   components: string[];
   justification: string;
   image: string;
+  gallery?: string[];
 }
 
 export interface TrustItem {
