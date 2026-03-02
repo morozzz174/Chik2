@@ -21,9 +21,10 @@ import {
 
 interface SolutionNoGasHiTechProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionNoGasHiTech: React.FC<SolutionNoGasHiTechProps> = ({ onBack }) => {
+const SolutionNoGasHiTech: React.FC<SolutionNoGasHiTechProps> = ({ onBack, onOpenContact }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -374,6 +375,26 @@ const SolutionNoGasHiTech: React.FC<SolutionNoGasHiTechProps> = ({ onBack }) => 
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-slate-900 text-white border-t border-white/10 relative overflow-hidden">
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-4xl font-black mb-6">Интересует гибридное решение?</h2>
+          <p className="text-gray-400 mb-10 max-w-2xl mx-auto text-lg">
+            Мы специализируемся на сложных системах, объединяющих электроэнергию и возобновляемые источники. Закажите расчет вашего энергоцентра.
+          </p>
+          <button 
+            onClick={() => onOpenContact('Расчет: Hi-Tech (Без газа)')}
+            className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-2xl flex items-center gap-3 mx-auto"
+          >
+            Заказать расчет энергоцентра
+            <ArrowRight size={20} />
+          </button>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[#b22222] rounded-full blur-[150px]"></div>
         </div>
       </section>
 

@@ -12,7 +12,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@5.4.624/build/pdf.worker.min.mjs`;
 
 interface Certificate {
   id: string;
@@ -28,63 +28,63 @@ const CERTIFICATES: Certificate[] = [
     title: 'Сертификат Jason H.E.S.&T',
     number: '№ ЕАЭС RU C-CN.АЖ49.В.04701/24',
     equipment: 'Котлы водогрейные отопительные E8',
-    url: '/cert1.pdf'
+    url: 'cert1.pdf'
   },
   {
     id: '2',
     title: 'Сертификат Kentatsu (Пром)',
     number: '№ ЕАЭС RU C-TR.HB26.B.04232/24',
     equipment: 'Котлы газовые отопительные > 100 кВт',
-    url: '/cert2.pdf'
+    url: 'cert2.pdf'
   },
   {
     id: '3',
     title: 'Сертификат Kentatsu (Быт)',
     number: '№ ЕАЭС RU C-CN.АБ53.В.07752/23',
     equipment: 'Котлы отопительные газовые до 100 кВт',
-    url: '/cert3.pdf'
+    url: 'cert3.pdf'
   },
   {
     id: '4',
     title: 'Сертификат Kentatsu (Электро)',
     number: '№ ЕАЭС RU C-CN.НВ93.В.00826/21',
     equipment: 'Электрические котлы Kentatsu',
-    url: '/cert4.pdf'
+    url: 'cert4.pdf'
   },
   {
     id: '5',
     title: 'Сертификат Kentatsu (Газ)',
     number: '№ ЕАЭС RU C-TR.АБ53.В.08647/23',
     equipment: 'Котлы газовые двухконтурные Nobby Smart',
-    url: '/cert5.pdf'
+    url: 'cert5.pdf'
   },
   {
     id: '6',
     title: 'Сертификат Лемакс (Element)',
     number: '№ ЕАЭС RU C-RU.АД87.В.00312/22',
     equipment: 'Аппараты отопительные Element, Aspect',
-    url: '/cert6.pdf'
+    url: 'cert6.pdf'
   },
   {
     id: '7',
     title: 'Сертификат Лемакс (Omega)',
     number: '№ ЕАЭС RU C-RU.АД85.В.00327/21',
     equipment: 'Котлы газовые отопительные Omega',
-    url: '/cert7.pdf'
+    url: 'cert7.pdf'
   },
   {
     id: '8',
     title: 'Сертификат Thermex (Водонагреватели)',
     number: '№ ЕАЭС RU C-RU.HB26.B.04242/24',
     equipment: 'Водонагреватели аккумуляционные электрические',
-    url: '/cert8.pdf'
+    url: 'cert8.pdf'
   },
   {
     id: '9',
     title: 'Сертификат Thermex (Котлы)',
     number: '№ ЕАЭС RU C-CN.АБ53.В.05683/22',
     equipment: 'Электрические котлы Grizzly, Skif, Tesla',
-    url: '/cert9.pdf'
+    url: 'cert9.pdf'
   }
 ];
 
@@ -144,6 +144,12 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
                   <Document
                     file={cert.url}
                     loading={<div className="p-8 text-gray-400">Загрузка...</div>}
+                    error={
+                      <div className="p-8 text-center">
+                        <div className="text-red-500 text-xs font-bold mb-2">Ошибка загрузки</div>
+                        <div className="text-[10px] text-gray-400">Нажмите, чтобы открыть напрямую</div>
+                      </div>
+                    }
                   >
                     <Page 
                       pageNumber={1} 
@@ -206,6 +212,21 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
                 file={selectedCert.url}
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={<div className="p-8 text-gray-400">Загрузка документа...</div>}
+                error={
+                  <div className="p-12 text-center bg-white rounded-2xl shadow-sm border border-gray-200 max-w-md">
+                    <AlertTriangle size={48} className="text-red-500 mx-auto mb-4" />
+                    <h4 className="text-xl font-bold text-[#0b2a4a] mb-2">Не удалось загрузить PDF</h4>
+                    <p className="text-gray-500 mb-6">Возможно, файл поврежден или заблокирован вашим браузером.</p>
+                    <a 
+                      href={selectedCert.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-block bg-[#b22222] text-white px-8 py-3 rounded-lg font-bold hover:bg-red-800 transition-colors"
+                    >
+                      Открыть в новой вкладке
+                    </a>
+                  </div>
+                }
                 className="flex flex-col gap-8 items-center w-full"
               >
                 {Array.from(new Array(numPages || 0), (el, index) => (

@@ -22,9 +22,10 @@ import {
 
 interface SolutionIndustrialProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionIndustrial: React.FC<SolutionIndustrialProps> = ({ onBack }) => {
+const SolutionIndustrial: React.FC<SolutionIndustrialProps> = ({ onBack, onOpenContact }) => {
   const equipment = [
     {
       name: 'Сигнал КОВ-100 СТн',
@@ -267,7 +268,10 @@ const SolutionIndustrial: React.FC<SolutionIndustrialProps> = ({ onBack }) => {
               </div>
               <div className="mt-16 flex flex-col sm:flex-row items-center justify-between gap-8 pt-8 border-t border-white/10">
                 <p className="text-sm text-gray-500 italic">Требуется выезд инженера для проведения гидравлического расчета.</p>
-                <button className="bg-[#b22222] text-white px-10 py-4 rounded-sm font-bold hover:bg-red-800 transition-all flex items-center gap-3 shadow-2xl">
+                <button 
+                  onClick={() => onOpenContact('Расчет: Промышленный объект / Отель')}
+                  className="bg-[#b22222] text-white px-10 py-4 rounded-sm font-bold hover:bg-red-800 transition-all flex items-center gap-3 shadow-2xl"
+                >
                   Заказать выезд инженера
                   <ArrowRight size={18} />
                 </button>

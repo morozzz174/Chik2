@@ -19,9 +19,10 @@ import {
 
 interface SolutionNoGasCommercialProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionNoGasCommercial: React.FC<SolutionNoGasCommercialProps> = ({ onBack }) => {
+const SolutionNoGasCommercial: React.FC<SolutionNoGasCommercialProps> = ({ onBack, onOpenContact }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -312,6 +313,23 @@ const SolutionNoGasCommercial: React.FC<SolutionNoGasCommercialProps> = ({ onBac
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 bg-gray-50 border-t border-gray-100">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-black text-[#0b2a4a] mb-6">Требуется промышленная котельная?</h2>
+          <p className="text-gray-500 mb-10 max-w-2xl mx-auto text-lg">
+            Мы проектируем и монтируем пеллетные котельные любой мощности "под ключ". Получите предварительный расчет стоимости оборудования и монтажа.
+          </p>
+          <button 
+            onClick={() => onOpenContact('Расчет: Коммерция (Без газа)')}
+            className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-xl inline-flex items-center gap-3"
+          >
+            Получить коммерческое предложение
+            <ArrowRight size={20} />
+          </button>
         </div>
       </section>
 

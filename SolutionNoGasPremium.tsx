@@ -17,9 +17,10 @@ import {
 
 interface SolutionNoGasPremiumProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionNoGasPremium: React.FC<SolutionNoGasPremiumProps> = ({ onBack }) => {
+const SolutionNoGasPremium: React.FC<SolutionNoGasPremiumProps> = ({ onBack, onOpenContact }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -402,6 +403,25 @@ const SolutionNoGasPremium: React.FC<SolutionNoGasPremiumProps> = ({ onBack }) =
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-[#0b2a4a] text-white overflow-hidden relative">
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h2 className="text-4xl font-black mb-6">Интересует геотермальное отопление?</h2>
+          <p className="text-gray-400 mb-10 max-w-2xl mx-auto">
+            Это сложное инженерное решение, требующее точных расчетов. Оставьте заявку на консультацию с нашим ведущим инженером.
+          </p>
+          <button 
+            onClick={() => onOpenContact('Расчет: Премиум (Без газа)')}
+            className="bg-[#b22222] text-white px-12 py-4 rounded-sm font-bold text-lg hover:bg-red-800 transition-colors shadow-xl"
+          >
+            Запросить расчет проекта
+          </button>
+        </div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#b22222] rounded-full blur-[120px]"></div>
         </div>
       </section>
 

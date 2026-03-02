@@ -23,9 +23,10 @@ import {
 
 interface SolutionNoGasEcoProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionNoGasEco: React.FC<SolutionNoGasEcoProps> = ({ onBack }) => {
+const SolutionNoGasEco: React.FC<SolutionNoGasEcoProps> = ({ onBack, onOpenContact }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -264,6 +265,22 @@ const SolutionNoGasEco: React.FC<SolutionNoGasEcoProps> = ({ onBack }) => {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-black text-[#0b2a4a] mb-6">Готовы к реализации?</h2>
+          <p className="text-gray-500 mb-10 max-w-2xl mx-auto">
+            Мы поможем подобрать оптимальный комплект оборудования под ваш бюджет и особенности объекта.
+          </p>
+          <button 
+            onClick={() => onOpenContact('Расчет: Эконом (Без газа)')}
+            className="bg-[#b22222] text-white px-12 py-4 rounded-sm font-bold text-lg hover:bg-red-800 transition-colors shadow-xl"
+          >
+            Запросить расчет
+          </button>
         </div>
       </section>
 

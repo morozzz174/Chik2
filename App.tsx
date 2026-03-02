@@ -17,8 +17,7 @@ import {
   DraftingCompass,
   HelpCircle,
   Maximize2,
-  X,
-  Award
+  X
 } from 'lucide-react';
 import { 
   TURNKEY_SOLUTIONS, 
@@ -47,9 +46,8 @@ import Certificates from './Certificates';
 import DesignService from './DesignService';
 import EquipmentFAQ from './EquipmentFAQ';
 import ContactModal from './src/ContactModal';
-import PresentationModal from './src/PresentationModal';
 
-const Header = ({ onOpenContact, onOpenPresentation }: { onOpenContact: () => void, onOpenPresentation: () => void }) => (
+const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
   <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div className="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
       <div className="flex flex-col items-center md:items-start mb-4 md:mb-0">
@@ -62,14 +60,7 @@ const Header = ({ onOpenContact, onOpenPresentation }: { onOpenContact: () => vo
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-4">
-        <button 
-          onClick={onOpenPresentation}
-          className="hidden md:flex items-center gap-2 text-[#0b2a4a] font-bold hover:text-[#b22222] transition-colors border-r border-gray-200 pr-4 mr-4"
-        >
-          <Award size={20} className="text-[#b22222]" />
-          <span>Презентация</span>
-        </button>
+      <div className="flex items-center gap-6">
         <a href="tel:+73512309996" className="flex items-center gap-2 text-[#0b2a4a] font-bold text-lg hover:text-[#b22222] transition-colors">
           <Phone size={20} />
           <span>+7 (351) 230-99-96</span>
@@ -82,7 +73,7 @@ const Header = ({ onOpenContact, onOpenPresentation }: { onOpenContact: () => vo
   </header>
 );
 
-const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign, onOpenPresentation }: { onOpenGasReq: () => void, onOpenPriceList: () => void, onOpenCertificates: () => void, onOpenDesign: () => void, onOpenPresentation: () => void }) => (
+const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign }: { onOpenGasReq: () => void, onOpenPriceList: () => void, onOpenCertificates: () => void, onOpenDesign: () => void }) => (
   <section className="relative h-[70vh] flex items-center bg-gray-900 overflow-hidden">
     <img 
       src="https://picsum.photos/seed/engineer/1920/1080" 
@@ -101,23 +92,43 @@ const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign,
         </p>
         <div className="flex flex-wrap gap-4">
           <button 
-            onClick={onOpenPresentation}
-            className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl flex items-center gap-2"
-          >
-            <Award size={24} />
-            Смотреть презентацию
-          </button>
-          <button 
             onClick={() => document.getElementById('turnkey')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
+            className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-xl"
           >
             Смотреть решения
           </button>
           <button 
             onClick={onOpenCertificates}
-            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all"
+            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
           >
             Наши сертификаты
+          </button>
+          <button 
+            onClick={onOpenGasReq}
+            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
+          >
+            <ClipboardCheck size={24} />
+            Требования для ГАЗА
+          </button>
+          <button 
+            onClick={onOpenPriceList}
+            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
+          >
+            <Calculator size={24} />
+            Прайс услуги
+          </button>
+          <button 
+            onClick={() => document.getElementById('no-gas')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+            className="bg-white text-[#0b2a4a] px-8 py-4 rounded-sm font-bold text-lg hover:bg-gray-100 transition-colors"
+          >
+            Смотреть решения без ГАЗА
+          </button>
+          <button 
+            onClick={onOpenDesign}
+            className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-sm font-bold text-lg hover:bg-white hover:text-[#0b2a4a] transition-all flex items-center gap-2"
+          >
+            <DraftingCompass size={24} />
+            Проектирование
           </button>
         </div>
       </div>
@@ -712,7 +723,6 @@ const Footer = ({ onOpenDesign, onOpenContact }: { onOpenDesign: () => void, onO
 export default function App() {
   const [view, setView] = useState<'home' | 'gas-requirements' | 'price-list' | 'solution-eco' | 'solution-optimal' | 'solution-premium' | 'solution-cogen' | 'solution-industrial' | 'solution-ng-eco' | 'solution-ng-opt' | 'solution-ng-prm' | 'solution-ng-hitech' | 'solution-ng-comm' | 'law-410' | 'law-798' | 'law-624' | 'law-384' | 'certificates' | 'design' | 'equipment-faq'>('home');
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-  const [isPresentationOpen, setIsPresentationOpen] = useState(false);
   const [contactModalTitle, setContactModalTitle] = useState('Заказать расчет');
 
   const openContactModal = (title: string) => {
@@ -729,43 +739,43 @@ export default function App() {
   }
 
   if (view === 'solution-eco') {
-    return <SolutionEco onBack={() => setView('home')} />;
+    return <SolutionEco onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-optimal') {
-    return <SolutionOptimal onBack={() => setView('home')} />;
+    return <SolutionOptimal onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-premium') {
-    return <SolutionPremium onBack={() => setView('home')} />;
+    return <SolutionPremium onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-cogen') {
-    return <SolutionCogen onBack={() => setView('home')} />;
+    return <SolutionCogen onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-industrial') {
-    return <SolutionIndustrial onBack={() => setView('home')} />;
+    return <SolutionIndustrial onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-ng-eco') {
-    return <SolutionNoGasEco onBack={() => setView('home')} />;
+    return <SolutionNoGasEco onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-ng-opt') {
-    return <SolutionNoGasOptimal onBack={() => setView('home')} />;
+    return <SolutionNoGasOptimal onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-ng-prm') {
-    return <SolutionNoGasPremium onBack={() => setView('home')} />;
+    return <SolutionNoGasPremium onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-ng-hitech') {
-    return <SolutionNoGasHiTech onBack={() => setView('home')} />;
+    return <SolutionNoGasHiTech onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'solution-ng-comm') {
-    return <SolutionNoGasCommercial onBack={() => setView('home')} />;
+    return <SolutionNoGasCommercial onBack={() => setView('home')} onOpenContact={openContactModal} />;
   }
 
   if (view === 'law-410') {
@@ -834,17 +844,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header 
-        onOpenContact={() => openContactModal('Заказать расчет')} 
-        onOpenPresentation={() => setIsPresentationOpen(true)}
-      />
+      <Header onOpenContact={() => openContactModal('Заказать расчет')} />
       <main className="flex-grow">
         <Hero 
           onOpenGasReq={() => setView('gas-requirements')} 
           onOpenPriceList={() => setView('price-list')}
           onOpenCertificates={() => setView('certificates')}
           onOpenDesign={() => { setView('design'); window.scrollTo(0, 0); }}
-          onOpenPresentation={() => setIsPresentationOpen(true)}
         />
         <StickyNav 
           onOpenGasReq={() => { setView('gas-requirements'); window.scrollTo(0, 0); }}
@@ -887,10 +893,6 @@ export default function App() {
         isOpen={isContactModalOpen} 
         onClose={() => setIsContactModalOpen(false)} 
         title={contactModalTitle}
-      />
-      <PresentationModal 
-        isOpen={isPresentationOpen} 
-        onClose={() => setIsPresentationOpen(false)} 
       />
     </div>
   );

@@ -20,9 +20,10 @@ import {
 
 interface SolutionCogenProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionCogen: React.FC<SolutionCogenProps> = ({ onBack }) => {
+const SolutionCogen: React.FC<SolutionCogenProps> = ({ onBack, onOpenContact }) => {
   const technologies = [
     {
       name: 'ЭВОГРЕСС (EVOGRESS)',
@@ -285,7 +286,10 @@ const SolutionCogen: React.FC<SolutionCogenProps> = ({ onBack }) => {
                 </p>
               </div>
             </div>
-            <button className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-2xl flex items-center gap-3 mx-auto">
+            <button 
+              onClick={() => onOpenContact('Расчет: Когенерация')}
+              className="bg-[#b22222] text-white px-12 py-5 rounded-sm font-bold text-lg hover:bg-red-800 transition-all shadow-2xl flex items-center gap-3 mx-auto"
+            >
               Заказать расчет энергоцентра
               <ArrowRight size={20} />
             </button>

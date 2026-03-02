@@ -20,9 +20,10 @@ import {
 
 interface SolutionPremiumProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionPremium: React.FC<SolutionPremiumProps> = ({ onBack }) => {
+const SolutionPremium: React.FC<SolutionPremiumProps> = ({ onBack, onOpenContact }) => {
   const boilers = [
     { name: 'Прохоров (РФ)', material: 'Чугун', energy: 'Да', price: '90-120 т.р.', features: 'Высокая ремонтопригодность, адаптация к перепадам газа.', tag: 'Надежность' },
     { name: 'Лемакс Classic-40', material: 'Сталь 2мм', energy: 'Да', price: '70-87 т.р.', features: 'Итальянская автоматика SIT, горелка POLIDORO.', tag: 'Популярный' },
@@ -334,7 +335,10 @@ const SolutionPremium: React.FC<SolutionPremiumProps> = ({ onBack }) => {
                     Готовность 2026
                   </h4>
                   <p className="text-sm text-gray-400 mb-8">Все предложенные решения соответствуют актуальным нормам безопасности и готовы к эксплуатации в суровом климате Урала.</p>
-                  <button className="w-full bg-[#b22222] py-4 rounded-sm font-bold hover:bg-red-800 transition-all flex items-center justify-center gap-2">
+                  <button 
+                    onClick={() => onOpenContact('Расчет: Полная автономия (Премиум)')}
+                    className="w-full bg-[#b22222] py-4 rounded-sm font-bold hover:bg-red-800 transition-all flex items-center justify-center gap-2"
+                  >
                     Запросить премиум-расчет
                     <ArrowRight size={18} />
                   </button>

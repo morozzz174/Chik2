@@ -18,9 +18,10 @@ import {
 
 interface SolutionOptimalProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionOptimal: React.FC<SolutionOptimalProps> = ({ onBack }) => {
+const SolutionOptimal: React.FC<SolutionOptimalProps> = ({ onBack, onOpenContact }) => {
   const boilers = [
     {
       brand: 'BAXI ECO Four 24 F',
@@ -321,7 +322,10 @@ const SolutionOptimal: React.FC<SolutionOptimalProps> = ({ onBack }) => {
               </div>
               <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div className="text-sm text-gray-400 italic">Данные актуальны на начало 2026 года.</div>
-                <button className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold hover:bg-red-800 transition-colors shadow-xl">
+                <button 
+                  onClick={() => onOpenContact('Расчет: Оптимальный дом')}
+                  className="bg-[#b22222] text-white px-8 py-4 rounded-sm font-bold hover:bg-red-800 transition-colors shadow-xl"
+                >
                   Заказать расчет проекта
                 </button>
               </div>

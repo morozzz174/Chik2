@@ -16,9 +16,10 @@ import {
 
 interface SolutionEcoProps {
   onBack: () => void;
+  onOpenContact: (title: string) => void;
 }
 
-const SolutionEco: React.FC<SolutionEcoProps> = ({ onBack }) => {
+const SolutionEco: React.FC<SolutionEcoProps> = ({ onBack, onOpenContact }) => {
   const boilers = [
     {
       model: 'Navien DELUXE 13K',
@@ -332,7 +333,10 @@ const SolutionEco: React.FC<SolutionEcoProps> = ({ onBack }) => {
 
           <div className="mt-16 text-center">
             <p className="text-gray-500 mb-8">Готовы обсудить детали и подготовить индивидуальный расчет под любой объект.</p>
-            <button className="bg-[#b22222] text-white px-12 py-4 rounded-sm font-bold text-lg hover:bg-red-800 transition-colors shadow-xl">
+            <button 
+              onClick={() => onOpenContact('Расчет: Доступный старт')}
+              className="bg-[#b22222] text-white px-12 py-4 rounded-sm font-bold text-lg hover:bg-red-800 transition-colors shadow-xl"
+            >
               Запросить расчет
             </button>
           </div>
