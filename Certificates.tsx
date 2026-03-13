@@ -6,13 +6,14 @@ import {
   Maximize2, 
   FileCheck, 
   Download,
-  ArrowDown
+  ArrowDown,
+  AlertTriangle
 } from 'lucide-react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@5.4.624/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
 
 interface Certificate {
   id: string;
@@ -144,12 +145,14 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
                   <Document
                     file={cert.url}
                     loading={<div className="p-8 text-gray-400">Загрузка...</div>}
-                    error={
+                    onLoadError={(error) => console.error('PDF Load Error:', error)}
+                    error={(err) => (
                       <div className="p-8 text-center">
                         <div className="text-red-500 text-xs font-bold mb-2">Ошибка загрузки</div>
+                        <div className="text-[10px] text-gray-400 mb-2">{err?.message || 'Неизвестная ошибка'}</div>
                         <div className="text-[10px] text-gray-400">Нажмите, чтобы открыть напрямую</div>
                       </div>
-                    }
+                    )}
                   >
                     <Page 
                       pageNumber={1} 
@@ -211,12 +214,14 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
               <Document
                 file={selectedCert.url}
                 onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={(error) => console.error('PDF Modal Load Error:', error)}
                 loading={<div className="p-8 text-gray-400">Загрузка документа...</div>}
-                error={
+                error={(err) => (
                   <div className="p-12 text-center bg-white rounded-2xl shadow-sm border border-gray-200 max-w-md">
                     <AlertTriangle size={48} className="text-red-500 mx-auto mb-4" />
                     <h4 className="text-xl font-bold text-[#0b2a4a] mb-2">Не удалось загрузить PDF</h4>
-                    <p className="text-gray-500 mb-6">Возможно, файл поврежден или заблокирован вашим браузером.</p>
+                    <p className="text-gray-500 mb-2">Возможно, файл поврежден или заблокирован вашим браузером.</p>
+                    <p className="text-xs text-red-400 mb-6">{err?.message || 'Неизвестная ошибка'}</p>
                     <a 
                       href={selectedCert.url} 
                       target="_blank" 
@@ -226,7 +231,7 @@ const Certificates: React.FC<CertificatesProps> = ({ onBack }) => {
                       Открыть в новой вкладке
                     </a>
                   </div>
-                }
+                )}
                 className="flex flex-col gap-8 items-center w-full"
               >
                 {Array.from(new Array(numPages || 0), (el, index) => (

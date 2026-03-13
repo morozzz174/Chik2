@@ -207,6 +207,7 @@ const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => vo
                 <img 
                   src={solution.image} 
                   alt={solution.title}
+                  onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/${solution.id}/800/600`; }}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-[#b22222] text-white text-xs font-bold px-2 py-1 rounded uppercase z-10">
@@ -276,6 +277,7 @@ const TurnkeySection = ({ onOpenSolution }: { onOpenSolution: (id: string) => vo
                 <img 
                   src={lightboxData.images[lightboxData.index]} 
                   alt="Enlarged view" 
+                  onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/lightbox/1920/1080`; }}
                   className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
                 />
               </div>
@@ -333,6 +335,7 @@ const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void
                 <img 
                   src={solution.image} 
                   alt={solution.title}
+                  onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/${solution.id}/800/600`; }}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4 bg-[#b22222] text-white text-[10px] font-bold px-2 py-1 rounded uppercase z-10">
@@ -495,6 +498,7 @@ const NoGasSection = ({ onOpenSolution }: { onOpenSolution: (id: string) => void
               <img 
                 src={lightboxData.images[lightboxData.index]} 
                 alt="Enlarged view" 
+                onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/lightbox/1920/1080`; }}
                 className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
               />
             </div>
@@ -600,8 +604,10 @@ const ExpertiseCatalog = () => {
 
               <div className="lg:col-span-2">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
-                  {[...Array(10)].map((_, i) => {
-                    const highResUrl = `https://picsum.photos/seed/${section.id}-${i}/1920/1080`;
+                  {(section.images ? section.images : [...Array(10)]).map((item, i) => {
+                    const imageUrl = section.images ? (item as string) : `https://picsum.photos/seed/${section.id}-${i}/800/800`;
+                    const highResUrl = section.images ? (item as string) : `https://picsum.photos/seed/${section.id}-${i}/1920/1080`;
+                    
                     return (
                       <div 
                         key={i}
@@ -609,8 +615,9 @@ const ExpertiseCatalog = () => {
                         className="aspect-square bg-gray-200 overflow-hidden relative group cursor-pointer"
                       >
                         <img 
-                          src={`https://picsum.photos/seed/${section.id}-${i}/800/800`}
+                          src={imageUrl}
                           alt={`Gallery ${i}`}
+                          onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/${section.id}-${i}/800/800`; }}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -638,6 +645,7 @@ const ExpertiseCatalog = () => {
           <img 
             src={lightboxImage} 
             alt="Enlarged view" 
+            onError={(e) => { e.currentTarget.src = `https://picsum.photos/seed/lightbox/1920/1080`; }}
             className="max-w-full max-h-full object-contain rounded-lg shadow-2xl animate-in fade-in zoom-in duration-300"
             onClick={(e) => e.stopPropagation()}
           />

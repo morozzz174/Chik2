@@ -28,4 +28,5 @@ export interface ExpertiseSection {
   }[];
   brands?: string[];
   galleryId: string;
+  images?: string[];
 }

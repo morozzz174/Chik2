@@ -19,8 +19,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Коаксиальный дымоход (нержавейка)'
     ],
     justification: 'Для домов до 100 м² газовое отопление экономически эффективнее электрического при наличии магистрали.',
-    image: 'https://i.postimg.cc/FY9p1h38/econom-gaz.jpg',
-    gallery: ['https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg', 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg']
+    image: '/images/solutions/econom-gaz.jpg',
+    gallery: ['/images/solutions/standart-gaz.jpg', '/images/solutions/premium-gaz.jpg']
   },
   {
     id: 'std',
@@ -34,8 +34,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 3 кВт + 2x LiFePo4 100Ач'
     ],
     justification: 'Конденсационные котлы достигают КПД до 98%, напрямую снижая затраты на топливо.',
-    image: 'https://i.postimg.cc/fVwCkMm1/standart-gaz.jpg',
-    gallery: ['https://i.postimg.cc/FY9p1h38/econom-gaz.jpg', 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg']
+    image: '/images/solutions/standart-gaz.jpg',
+    gallery: ['/images/solutions/econom-gaz.jpg', '/images/solutions/premium-gaz.jpg']
   },
   {
     id: 'prm',
@@ -49,8 +49,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Инвертор 10 кВт + станция LiFePo4 15 кВт*ч'
     ],
     justification: 'Независимость от сетей критична в пик зимы при возможных авариях на ЛЭП.',
-    image: 'https://i.postimg.cc/21zG3Cht/premium-gaz.jpg',
-    gallery: ['https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg', 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg']
+    image: '/images/solutions/premium-gaz.jpg',
+    gallery: ['/images/solutions/hitech-gaz.jpg', '/images/solutions/commerce-gaz.jpg']
   },
   {
     id: 'htech',
@@ -64,8 +64,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Утилизация тепла двигателя'
     ],
     justification: 'КПД до 95%. Генерация "бесплатного" электричества окупает систему за 3-5 лет.',
-    image: 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg',
-    gallery: ['https://i.postimg.cc/21zG3Cht/premium-gaz.jpg', 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg']
+    image: '/images/solutions/hitech-gaz.jpg',
+    gallery: ['/images/solutions/premium-gaz.jpg', '/images/solutions/commerce-gaz.jpg']
   },
   {
     id: 'ind',
@@ -79,8 +79,8 @@ export const TURNKEY_SOLUTIONS: TurnkeySolution[] = [
       'Резервное топливное хозяйство (ПП №798)'
     ],
     justification: 'Своя генерация дешевле подключения к ЛЭП для удаленных объектов.',
-    image: 'https://i.postimg.cc/CRF7dwk7/commerce-gaz.jpg',
-    gallery: ['https://i.postimg.cc/21zG3Cht/premium-gaz.jpg', 'https://i.postimg.cc/XrVLXndz/hitech-gaz.jpg']
+    image: '/images/solutions/commerce-gaz.jpg',
+    gallery: ['/images/solutions/premium-gaz.jpg', '/images/solutions/hitech-gaz.jpg']
   }
 ];
 
@@ -97,8 +97,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Монтаж за 1-2 дня, без дымохода'
     ],
     justification: 'Самое быстрое и дешевое решение. ZOTA надежно работает при перепадах напряжения в поселках.',
-    image: 'https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg',
-    gallery: ['https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
+    image: '/images/solutions/ng-eco.jpg',
+    gallery: ['/images/solutions/ng-std.jpg', '/images/solutions/ng-prm.jpg']
   },
   {
     id: 'ng-opt',
@@ -112,8 +112,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Экономия в 3-4 раза выше электрокотла'
     ],
     justification: 'Лучший баланс цены и экономичности. Окупаемость 4-5 лет за счет низкого энергопотребления.',
-    image: 'https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg',
-    gallery: ['https://i.postimg.cc/wyvS15XG/1-resenie-ekonom.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
+    image: '/images/solutions/ng-std.jpg',
+    gallery: ['/images/solutions/ng-eco.jpg', '/images/solutions/ng-prm.jpg']
   },
   {
     id: 'ng-prm',
@@ -127,8 +127,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Стабильное тепло в любые морозы'
     ],
     justification: 'Максимальная эффективность круглый год. Земля на глубине всегда +5-7°C. Срок службы 30+ лет.',
-    image: 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg',
-    gallery: ['https://i.postimg.cc/5Hph9KCR/2-resenie-standart.jpg', 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg']
+    image: '/images/solutions/ng-prm.jpg',
+    gallery: ['/images/solutions/ng-std.jpg', '/images/solutions/ng-htech.jpg']
   },
   {
     id: 'ng-ind',
@@ -142,8 +142,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Гибридный инвертор "Солнечный ветер"'
     ],
     justification: 'Снижение пиковых нагрузок. Солнечные панели летом полностью покрывают ГВС и кондиционирование.',
-    image: 'https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg',
-    gallery: ['https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg', 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg']
+    image: '/images/solutions/ng-htech.jpg',
+    gallery: ['/images/solutions/ng-prm.jpg', '/images/solutions/ng-ind.jpg']
   },
   {
     id: 'ng-pellet',
@@ -157,8 +157,8 @@ export const NO_GAS_SOLUTIONS: TurnkeySolution[] = [
       'Факельная горелка, авторозжиг'
     ],
     justification: 'Идеально для производств с отходами деревообработки. Окупаемость 2-4 года при наличии отходов.',
-    image: 'https://i.postimg.cc/PLKgfVwm/5-resenie-prom.jpg',
-    gallery: ['https://i.postimg.cc/wtFCx4mP/4-resenie-najtek.jpg', 'https://i.postimg.cc/7CXFPt2b/3-resenie-premium.jpg']
+    image: '/images/solutions/ng-ind.jpg',
+    gallery: ['/images/solutions/ng-htech.jpg', '/images/solutions/ng-prm.jpg']
   }
 ];
 
@@ -199,7 +199,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Navien (Корея)', value: 'Адаптированы под давление в Челябинске' }
     ],
     brands: ['Baxi', 'Vaillant', 'Navien', 'Лемакс'],
-    galleryId: 'boilers'
+    galleryId: 'boilers',
+    images: [
+      '/images/boilers/1.jpg',
+      '/images/boilers/3.jpg',
+      '/images/boilers/4.jpg',
+      '/images/boilers/5.jpg',
+      '/images/boilers/6.jpg',
+      '/images/boilers/7.jpg',
+      '/images/boilers/8.jpg',
+      '/images/boilers/9.jpg',
+      '/images/boilers/10.jpg',
+      '/images/boilers/11.jpg'
+    ]
   },
   {
     id: 'piping',
@@ -209,7 +221,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Баки', value: 'Расширительные закрытого типа' },
       { label: 'Безопасность', value: 'Сбросные клапаны, воздухоотводчики' }
     ],
-    galleryId: 'piping'
+    galleryId: 'piping',
+    images: [
+      '/images/piping/1.jpg',
+      '/images/piping/2.jpg',
+      '/images/piping/3.jpg',
+      '/images/piping/4.jpg',
+      '/images/piping/5.jpg',
+      '/images/piping/6.jpg',
+      '/images/piping/7.jpg',
+      '/images/piping/8.jpg',
+      '/images/piping/9.jpg',
+      '/images/piping/10.jpg'
+    ]
   },
   {
     id: 'chimneys',
@@ -219,7 +243,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Сэндвич', value: 'Нержавеющая сталь для напольных систем' },
       { label: 'Диаметры', value: '100, 150, 200 мм' }
     ],
-    galleryId: 'chimneys'
+    galleryId: 'chimneys',
+    images: [
+      '/images/chimneys/1.jpg',
+      '/images/chimneys/2.jpg',
+      '/images/chimneys/3.jpg',
+      '/images/chimneys/4.jpg',
+      '/images/chimneys/5.jpg',
+      '/images/chimneys/6.jpg',
+      '/images/chimneys/7.jpg',
+      '/images/chimneys/8.jpg',
+      '/images/chimneys/9.jpg',
+      '/images/chimneys/10.jpg'
+    ]
   },
   {
     id: 'ups',
@@ -229,7 +265,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Автономия', value: 'Внешние AGM АКБ на 4-8 часов' },
       { label: 'Монтаж', value: 'Стойки, настенные блоки' }
     ],
-    galleryId: 'ups'
+    galleryId: 'ups',
+    images: [
+      '/images/ups/1.jpg',
+      '/images/ups/2.jpg',
+      '/images/ups/3.jpg',
+      '/images/ups/4.jpg',
+      '/images/ups/5.jpg',
+      '/images/ups/6.jpg',
+      '/images/ups/7.jpg',
+      '/images/ups/8.jpg',
+      '/images/ups/9.jpg',
+      '/images/ups/10.jpg'
+    ]
   },
   {
     id: 'inverters',
@@ -239,7 +287,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'АКБ', value: 'LiFePo4 (6000+ циклов, подогрев)' },
       { label: 'Скорость', value: 'АВР за 0.02 сек' }
     ],
-    galleryId: 'inverters'
+    galleryId: 'inverters',
+    images: [
+      '/images/inverters/1.jpg',
+      '/images/inverters/2.jpg',
+      '/images/inverters/3.jpg',
+      '/images/inverters/4.jpg',
+      '/images/inverters/5.jpg',
+      '/images/inverters/6.jpg',
+      '/images/inverters/7.jpg',
+      '/images/inverters/8.jpg',
+      '/images/inverters/9.jpg',
+      '/images/inverters/10.jpg'
+    ]
   },
   {
     id: 'elec_heat',
@@ -249,7 +309,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Назначение', value: 'Резервирование газа' },
       { label: 'Автоматика', value: 'Терморегуляторы с Wi-Fi' }
     ],
-    galleryId: 'elec'
+    galleryId: 'elec',
+    images: [
+      '/images/elec_heat/1.jpg',
+      '/images/elec_heat/2.jpg',
+      '/images/elec_heat/3.jpg',
+      '/images/elec_heat/4.jpg',
+      '/images/elec_heat/5.jpg',
+      '/images/elec_heat/6.jpg',
+      '/images/elec_heat/7.jpg',
+      '/images/elec_heat/8.jpg',
+      '/images/elec_heat/9.jpg',
+      '/images/elec_heat/10.jpg'
+    ]
   },
   {
     id: 'cogen',
@@ -259,7 +331,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Терм. КПД', value: '~60%' },
       { label: 'Бренды', value: 'Honda, EC Power, РФ' }
     ],
-    galleryId: 'cogen'
+    galleryId: 'cogen',
+    images: [
+      '/images/cogen/1.jpg',
+      '/images/cogen/2.jpg',
+      '/images/cogen/3.jpg',
+      '/images/cogen/4.jpg',
+      '/images/cogen/5.jpg',
+      '/images/cogen/6.jpg',
+      '/images/cogen/7.jpg',
+      '/images/cogen/8.jpg',
+      '/images/cogen/9.jpg',
+      '/images/cogen/10.jpg'
+    ]
   },
   {
     id: 'fuelcells',
@@ -269,7 +353,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'КПД', value: 'До 60% по электричеству' },
       { label: 'Шум', value: '0 дБ (нет движущихся частей)' }
     ],
-    galleryId: 'innovation'
+    galleryId: 'innovation',
+    images: [
+      '/images/fuelcells/1.jpg',
+      '/images/fuelcells/2.jpg',
+      '/images/fuelcells/3.jpg',
+      '/images/fuelcells/4.jpg',
+      '/images/fuelcells/5.jpg',
+      '/images/fuelcells/6.jpg',
+      '/images/fuelcells/7.jpg',
+      '/images/fuelcells/8.jpg',
+      '/images/fuelcells/9.jpg',
+      '/images/fuelcells/10.jpg'
+    ]
   },
   {
     id: 'design',
@@ -279,7 +375,19 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Проект', value: 'По ПП №798' },
       { label: 'ПНР', value: 'Пусконаладка с гарантией' }
     ],
-    galleryId: 'design'
+    galleryId: 'design',
+    images: [
+      '/images/design/1.jpg',
+      '/images/design/2.jpg',
+      '/images/design/3.jpg',
+      '/images/design/4.jpg',
+      '/images/design/5.jpg',
+      '/images/design/6.jpg',
+      '/images/design/7.jpg',
+      '/images/design/8.jpg',
+      '/images/design/9.jpg',
+      '/images/design/10.jpg'
+    ]
   },
   {
     id: 'service',
@@ -289,6 +397,18 @@ export const EXPERTISE_SECTIONS: ExpertiseSection[] = [
       { label: 'Аварийка', value: 'Выезд при отказе 24/7' },
       { label: 'Диагностика', value: 'Газоанализаторы Testo' }
     ],
-    galleryId: 'service'
+    galleryId: 'service',
+    images: [
+      '/images/service/1.jpg',
+      '/images/service/2.jpg',
+      '/images/service/3.jpg',
+      '/images/service/4.jpg',
+      '/images/service/5.jpg',
+      '/images/service/6.jpg',
+      '/images/service/7.jpg',
+      '/images/service/8.jpg',
+      '/images/service/9.jpg',
+      '/images/service/10.jpg'
+    ]
   }
 ];

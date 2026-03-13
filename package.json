@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
+    "axios": "^1.13.6",
     "lucide-react": "^0.575.0",
-    "pdfjs-dist": "^5.4.624",
+    "node-fetch": "^3.3.2",
+    "pdfjs-dist": "5.4.296",
     "pdfkit": "^0.17.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
