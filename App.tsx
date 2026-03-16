@@ -76,7 +76,7 @@ const Header = ({ onOpenContact }: { onOpenContact: () => void }) => (
 const Hero = ({ onOpenGasReq, onOpenPriceList, onOpenCertificates, onOpenDesign }: { onOpenGasReq: () => void, onOpenPriceList: () => void, onOpenCertificates: () => void, onOpenDesign: () => void }) => (
   <section className="relative h-[70vh] flex items-center bg-gray-900 overflow-hidden">
     <img 
-      src="https://picsum.photos/seed/engineer/1920/1080" 
+      src="/images/hero-bg.jpg" 
       alt="Engineering" 
       className="absolute inset-0 w-full h-full object-cover opacity-40"
     />
